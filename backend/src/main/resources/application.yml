@@ -1,0 +1,24 @@
+server:
+  servlet:
+    context-path: /api
+spring:
+  datasource:
+    master:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://db_master:3306/book
+        read-only: false
+        username: root
+        password: 1234
+    slave:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://db_slave:3306/book
+        read-only: true
+        username: root
+        password: 1234
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true

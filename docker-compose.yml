@@ -1,0 +1,61 @@
+version: "3"
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - db_master
+      - db_slave
+    networks:
+      - app-tier
+    restart: always
+
+  db_master:
+    build:
+      context: ./master
+    container_name: db_master
+    environment:
+      MYSQL_DATABASE: book
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - 3306:3306
+    volumes:
+      - my-db-master:/var/lib/mysql
+      - my-db-master-files:/var/lib/mysql-files
+    networks:
+      - app-tier
+    restart: always
+    tty: true
+
+  db_slave:
+    build:
+      context: ./slave
+    container_name: db_slave
+    environment:
+      MYSQL_DATABASE: book
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - 3307:3306
+    volumes:
+      - my-db-slave:/var/lib/mysql
+      - my-db-slave-files:/var/lib/mysql-files
+    networks:
+      - app-tier
+    restart: always
+    tty: true
+
+volumes:
+  my-db-master: null
+  my-db-master-files: null
+  my-db-slave: null
+  my-db-slave-files: null
+
+networks:
+  app-tier:
+    driver: bridge
