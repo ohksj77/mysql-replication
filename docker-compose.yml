@@ -18,8 +18,6 @@ services:
     container_name: db_master
     environment:
       MYSQL_DATABASE: book
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 1234
       MYSQL_ROOT_PASSWORD: 1234
     ports:
       - 3306:3306
@@ -37,9 +35,9 @@ services:
     container_name: db_slave
     environment:
       MYSQL_DATABASE: book
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 1234
       MYSQL_ROOT_PASSWORD: 1234
+    depends_on:
+      - db_master
     ports:
       - 3307:3306
     volumes:
