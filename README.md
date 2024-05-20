@@ -22,7 +22,7 @@ docker-compose up -d
   - request body, response body 모두 정상 작동함을 확인
   - ![](https://github.com/ohksj77/mysql-replication/assets/89020004/4718c793-144a-4ef1-89a1-83419011d204)
   - ![](https://github.com/ohksj77/mysql-replication/assets/89020004/bbb4d944-7a01-489c-8405-5d719ff7626c)
-- envelop 패턴을 위한 ResponseBodyAdvice 재정의
+- envelope 패턴을 위한 ResponseBodyAdvice 재정의
   - ![](https://github.com/ohksj77/mysql-replication/assets/89020004/faada3e2-0fbc-49f0-a900-983ba3288d5e)
   - 예제를 따라하느라 제네릭에 Object를 넣어 의미가 없어졌지만, 이후 제네릭스럽게 테스트 해보고자 함
   - @RestControllerAdvice 클래스 내부 메서드의 반환 또한 ApiResponse<T>로 래핑되어 반환됨을 확인함
